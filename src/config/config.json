@@ -1,0 +1,114 @@
+[
+    {
+        "id": "desk_1",
+        "model_path": "/models/desk_1.glb",
+        "rotation": [
+            0,
+            1.67,
+            0
+        ],
+        "position": [
+            1.9,
+            -2,
+            0
+        ],
+        "scale": [0.15,0.11,0.15],
+        "info": "text here"
+    },
+    {
+        "id": "desk_2",
+        "model_path": "/models/desk_2.glb",
+        "position": [
+            0,
+            -1.88,
+            0
+        ],
+        "rotation": [
+            0,
+            0,
+            0
+        ],
+        "scale": 2,
+        "info": "text here"
+    },
+    {
+        "id": "desk_3",
+        "model_path": "/models/desk_3.glb",
+        "position": [
+            0,
+            -1.88,
+            0
+        ],
+        "rotation": [
+            0,
+            0,
+            0
+        ],
+        "scale": 1.0,
+        "info": "text here"
+    },
+    {
+        "id": "chair_1",
+        "model_path": "/models/chair_1.glb",
+        "position": [
+            0,
+            -1.9,
+            2
+        ],
+        "rotation": [
+            0,
+            3.14,
+            0
+        ],
+        "scale": 1.5,
+        "info": "text here"
+    },
+    {
+        "id": "chair_2",
+        "model_path": "/models/chair_2.glb",
+        "position": [
+            0,
+            -1.9,
+            2.3
+        ],
+        "rotation": [
+            0,
+            3.14,
+            0
+        ],
+        "scale": 0.05,
+        "info": "text here"
+    },
+    {
+        "id": "keyboard_1",
+        "model_path": "/models/keyboard_1.glb",
+        "position": [
+            0,
+            -1.9,
+            2.3
+        ],
+        "rotation": [
+            0,
+            3.14,
+            0
+        ],
+        "scale": 0.05,
+        "info": "text here"
+    },
+    {
+        "id": "keyboard_5",
+        "model_path": "/models/keyboard_5.glb",
+        "position": [
+            0,
+            0,
+            0
+        ],
+        "rotation": [
+            0,
+            0,
+            0
+        ],
+        "scale": 5,
+        "info": "text here"
+    }
+]
