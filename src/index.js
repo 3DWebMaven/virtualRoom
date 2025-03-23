@@ -6,6 +6,7 @@ import { Leva } from "leva"
 createRoot(document.getElementById("root")).render(
   <>
     <App />
+    <div className="dot" />
     <Leva collapsed />
   </>
 )

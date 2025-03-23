@@ -53,7 +53,7 @@ export default function App() {
           <Player />
           <Room scale={0.5} position={[0, -1, 0]} />
         </Physics>
-        <Sky inclination={0.5} scale={20} />
+        <Sky sunPosition={[100, 20, 100]} />
         <PointerLockControls />
       </Canvas>
     </KeyboardControls>
