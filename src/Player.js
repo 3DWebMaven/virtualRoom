@@ -6,7 +6,7 @@ import { useKeyboardControls } from "@react-three/drei"
 import { CapsuleCollider, RigidBody, useRapier } from "@react-three/rapier"
 
 
-const SPEED = 5
+const SPEED = 10
 const direction = new THREE.Vector3()
 const frontVector = new THREE.Vector3()
 const sideVector = new THREE.Vector3()
@@ -35,7 +35,7 @@ export function Player({ lerp = THREE.MathUtils.lerp }) {
   return (
     <>
       <RigidBody ref={ref} colliders={false} mass={1} type="dynamic" position={[0, 10, 0]} enabledRotations={[false, false, false]}>
-        <CapsuleCollider args={[0.75, 0.5]} />
+        <CapsuleCollider args={[0.75, 4]} />
       </RigidBody>
     </>
   )
