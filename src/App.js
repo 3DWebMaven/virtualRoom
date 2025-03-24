@@ -30,14 +30,14 @@ const InidiatorComponent = (props) => {
 
   const onMove = useCallback((e) => {
     e.stopPropagation()
-    if(e.distance < near){
+    if (e.distance < near) {
       set(e.eventObject.name)
     }
   }, [])
   const onOut = useCallback(() => set(null), [])
   const onClick = useCallback((e) => {
     e.stopPropagation()
-    if(e.distance < near){
+    if (e.distance < near) {
       console.log('e', e)
     }
   }, [])
@@ -75,32 +75,33 @@ export default function App() {
     samples: { value: 16, min: 1, max: 40, step: 1 }
   })
   return (
-    <KeyboardControls
-      map={[
-        { name: "forward", keys: ["ArrowUp", "w", "W"] },
-        { name: "backward", keys: ["ArrowDown", "s", "S"] },
-        { name: "left", keys: ["ArrowLeft", "a", "A"] },
-        { name: "right", keys: ["ArrowRight", "d", "D"] },
-        { name: "jump", keys: ["Space"] },
-      ]}>
-      <Canvas shadows camera={{ position: [5, 2, 10], fov: 50 }}>
-        {debug && <Perf position="top-left" />}
-        <PerformanceMonitor onDecline={() => set(true)} />
-        {enabled && <SoftShadows {...config} samples={bad ? Math.min(6, samples) : samples} />}
-        {/* <color attach="background" args={["#d0d0d0"]} />
+    <>
+      <KeyboardControls
+        map={[
+          { name: "forward", keys: ["ArrowUp", "w", "W"] },
+          { name: "backward", keys: ["ArrowDown", "s", "S"] },
+          { name: "left", keys: ["ArrowLeft", "a", "A"] },
+          { name: "right", keys: ["ArrowRight", "d", "D"] },
+          { name: "jump", keys: ["Space"] },
+        ]}>
+        <Canvas shadows camera={{ position: [5, 2, 10], fov: 50 }}>
+          {debug && <Perf position="top-left" />}
+          <PerformanceMonitor onDecline={() => set(true)} />
+          {enabled && <SoftShadows {...config} samples={bad ? Math.min(6, samples) : samples} />}
+          {/* <color attach="background" args={["#d0d0d0"]} />
         <OrbitControls enablePan={false} enableZoom={false} />
         <Light /> */}
-        <fog attach="fog" args={["#d0d0d0", 8, 150]} />
-        <ambientLight intensity={0.4} />
-        <Physics gravity={[0, -30, 0]} debug>
-          <Player />
-          <Room scale={0.5} position={[0, -1, 0]} />
-        </Physics>
-        <Sky sunPosition={[100, 20, 100]} />
-        <PointerLockControls />
-        <InidiatorComponent name="indicator_1" position={[1,0,0]} />
-        <InidiatorComponent name="indicator_2" position={[3,1,3]} />
-      </Canvas>
-    </KeyboardControls>
+          <fog attach="fog" args={["#d0d0d0", 8, 150]} />
+          <ambientLight intensity={0.4} />
+          <Physics gravity={[0, -30, 0]} debug>
+            <Player />
+            <Room scale={0.5} position={[0, -1, 0]} />
+          </Physics>
+          <Sky sunPosition={[100, 20, 100]} />
+          <PointerLockControls />
+          <InidiatorComponent name="indicator_1" position={[1, 0, 0]} />
+        </Canvas>
+      </KeyboardControls>
+    </>
   )
 }
