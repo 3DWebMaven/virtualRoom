@@ -13,3 +13,4 @@ export function Model(props) {
 }
 
 useGLTF.preload("/showroom2.glb")
+
