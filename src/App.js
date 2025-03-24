@@ -24,17 +24,22 @@ import { Html } from "@react-three/drei"
 // }
 
 const InidiatorComponent = (props) => {
+  const near = 8;
   const [hover, set] = useState(null)
   const texture = useTexture('../image_icon.png')
 
   const onMove = useCallback((e) => {
     e.stopPropagation()
-    set(e.eventObject.name)
+    if(e.distance < near){
+      set(e.eventObject.name)
+    }
   }, [])
   const onOut = useCallback(() => set(null), [])
   const onClick = useCallback((e) => {
     e.stopPropagation()
-    console.log("e", e)
+    if(e.distance < near){
+      console.log('e', e)
+    }
   }, [])
 
   return (
