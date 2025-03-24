@@ -99,7 +99,7 @@ export default function App() {
           </Physics>
           <Sky sunPosition={[100, 20, 100]} />
           <PointerLockControls />
-          <InidiatorComponent name="indicator_1" position={[1, 0, 0]} />
+          {/* <InidiatorComponent name="indicator_1" position={[1, 0, 0]} /> */}
         </Canvas>
       </KeyboardControls>
     </>
