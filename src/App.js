@@ -73,7 +73,7 @@ export default function App() {
         <Canvas camera={{ position: [5, 2, 10], fov: 50 }}>
           {debug && <Perf position="top-left" />}
           <PerformanceMonitor onDecline={() => set(true)} />
-          <ambientLight intensity={1.0} shadow={false} />
+          <ambientLight intensity={1.0} color={'#fff'} shadow={false} />
           <Physics gravity={[0, -30, 0]} debug>
             <Player />
             <Room scale={0.5} position={[0, -1, 0]} />
