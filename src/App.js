@@ -1,6 +1,6 @@
 import { useRef, useState, useCallback, useMemo } from "react"
 import { Canvas, useFrame } from "@react-three/fiber"
-import { SoftShadows, Float, CameraControls, Sky, PerformanceMonitor, Loader, OrbitControls, PointerLockControls, KeyboardControls, useTexture } from "@react-three/drei"
+import { SoftShadows, Float, CameraControls, Sky, PerformanceMonitor, Loader, OrbitControls, PointerLockControls, KeyboardControls, useTexture, Environment } from "@react-three/drei"
 import { Physics } from "@react-three/rapier"
 import { useControls } from "leva"
 import { Perf } from "r3f-perf"
@@ -70,14 +70,15 @@ export default function App() {
           { name: "right", keys: ["ArrowRight", "d", "D"] },
           { name: "jump", keys: ["Space"] },
         ]}>
-        <Canvas gl={{ alpha: true, stencil: false, antialias: false }}
-          camera={{ position: [5, 2, 10], fov: 50 }}>
+        <Canvas flat gl={{ alpha: true, stencil: false, antialias: true }}
+          camera={{ position: [1, 2, 20], fov: 50 }}>
           {debug && <Perf position="top-left" />}
           <PerformanceMonitor onDecline={() => set(true)} />
-          <ambientLight intensity={1.0} color={'#fff'} shadow={false} />
-          <Physics gravity={[0, -30, 0]} debug>
+          <ambientLight intensity={1.0} color={'#fff'} />
+          {/* <spotLight intensity={0.5} angle={0.1} penumbra={1} position={[10, 15, -5]} /> */}
+          <Physics gravity={[0, -50, 0]} debug>
             <Player />
-            <Room scale={0.5} position={[0, -1, 0]} />
+            <Room/>
           </Physics>
           <Sky sunPosition={[100, 20, 100]} />
           <PointerLockControls />

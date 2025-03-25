@@ -41,7 +41,7 @@ export function Player({ lerp = THREE.MathUtils.lerp }) {
         position={[0, 10, 0]}
         enabledRotations={[false, false, false]}
       >
-        <CapsuleCollider args={[0.75, 4]} />
+        <CapsuleCollider args={[0.001, 15]} />
       </RigidBody>
     </>
   )
