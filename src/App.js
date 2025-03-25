@@ -70,7 +70,8 @@ export default function App() {
           { name: "right", keys: ["ArrowRight", "d", "D"] },
           { name: "jump", keys: ["Space"] },
         ]}>
-        <Canvas camera={{ position: [5, 2, 10], fov: 50 }}>
+        <Canvas gl={{ alpha: true, stencil: false, antialias: false }}
+          camera={{ position: [5, 2, 10], fov: 50 }}>
           {debug && <Perf position="top-left" />}
           <PerformanceMonitor onDecline={() => set(true)} />
           <ambientLight intensity={1.0} color={'#fff'} shadow={false} />
