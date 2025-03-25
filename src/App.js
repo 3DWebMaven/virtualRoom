@@ -84,15 +84,10 @@ export default function App() {
           { name: "right", keys: ["ArrowRight", "d", "D"] },
           { name: "jump", keys: ["Space"] },
         ]}>
-        <Canvas shadows camera={{ position: [5, 2, 10], fov: 50 }}>
+        <Canvas camera={{ position: [5, 2, 10], fov: 50 }}>
           {debug && <Perf position="top-left" />}
           <PerformanceMonitor onDecline={() => set(true)} />
-          {enabled && <SoftShadows {...config} samples={bad ? Math.min(6, samples) : samples} />}
-          {/* <color attach="background" args={["#d0d0d0"]} />
-        <OrbitControls enablePan={false} enableZoom={false} />
-        <Light /> */}
-          <fog attach="fog" args={["#d0d0d0", 8, 150]} />
-          <ambientLight intensity={0.4} />
+          <ambientLight intensity={1.0} shadow={false} />
           <Physics gravity={[0, -30, 0]} debug>
             <Player />
             <Room scale={0.5} position={[0, -1, 0]} />
