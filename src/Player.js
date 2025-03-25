@@ -38,10 +38,10 @@ export function Player({ lerp = THREE.MathUtils.lerp }) {
         colliders={false}
         mass={1}
         type="dynamic"
-        position={[0, 10, 0]}
+        position={[-10, 10, 30]}
         enabledRotations={[false, false, false]}
       >
-        <CapsuleCollider args={[0.001, 15]} />
+        <CapsuleCollider args={[10, 2]} />
       </RigidBody>
     </>
   )

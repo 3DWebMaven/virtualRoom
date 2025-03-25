@@ -15,9 +15,9 @@ export function Model(props) {
             <meshBasicMaterial map={videoTexture} side={2} color={'#fff'} />
             <planeGeometry args={[30, 15]} />
           </mesh>
-          <mesh position={[0, 0, -9]}scale={[30, 6, 30]}>
+          <mesh position={[0, 0, -9]} >
             <meshBasicMaterial transparent opacity={0.0} />
-            <boxGeometry />
+            <boxGeometry args={[30, 300, 30]}/>
           </mesh>
         </RigidBody>
       </group>
@@ -25,8 +25,8 @@ export function Model(props) {
         <AnimatedModel rotation={[0, 2, 0]} position={[-80, -5, 20]} scale={4.5} url={"/models/woman_3_o.glb"} />
         <AnimatedModel rotation={[0, 2, 0]} position={[-90, -5, 25]} scale={4.5} url={"/models/woman_2_o.glb"} />
         <AnimatedModel rotation={[0, 1.5, 0]} position={[-130, -5, 0]} scale={4.5} url={"/models/woman_4_o.glb"} />
-        <AnimatedModel rotation={[0, 2, 0]} position={[-40, -5, -15]} scale={9} url={"/models/woman_1.glb"} />
-        <AnimatedModel rotation={[0, -0.5, 0]} position={[-30, -5, 25]} scale={10} url={"/models/man_1.glb"} />
+        <AnimatedModel rotation={[0, 3, 0]} position={[-85, -5, -30]} scale={9} url={"/models/woman_1.glb"} />
+        <AnimatedModel rotation={[0, -0.5, 0]} position={[-30, -5, 25]} scale={8} url={"/models/man_1.glb"} />
         <AnimatedModel rotation={[0, 2.5, 0]} position={[-110, -5, -25]} scale={3.8} url={"/models/man_2.glb"} />
       </group>
     </>
