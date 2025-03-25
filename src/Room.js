@@ -24,9 +24,10 @@ export function Model(props) {
       <group dispose={null}>
         <AnimatedModel rotation={[0, 2, 0]} position={[-80, -5, 20]} scale={4.5} url={"/models/woman_3_o.glb"} />
         <AnimatedModel rotation={[0, 2, 0]} position={[-90, -5, 25]} scale={4.5} url={"/models/woman_2_o.glb"} />
+        <AnimatedModel rotation={[0, 1.5, 0]} position={[-130, -5, 0]} scale={4.5} url={"/models/woman_4_o.glb"} />
+        <AnimatedModel rotation={[0, 2, 0]} position={[-40, -5, -15]} scale={9} url={"/models/woman_1.glb"} />
         <AnimatedModel rotation={[0, -0.5, 0]} position={[-30, -5, 25]} scale={10} url={"/models/man_1.glb"} />
         <AnimatedModel rotation={[0, 2.5, 0]} position={[-110, -5, -25]} scale={3.8} url={"/models/man_2.glb"} />
-        <AnimatedModel rotation={[0, 1.5, 0]} position={[-130, -5, 0]} scale={4.5} url={"/models/woman_4_o.glb"} />
       </group>
     </>
   )
@@ -67,3 +68,8 @@ function AnimatedModel(props) {
 }
 
 useGLTF.preload("/showroom2.glb")
+useGLTF.preload("/models/woman_2_o.glb")
+useGLTF.preload("/models/woman_3_o.glb")
+useGLTF.preload("/models/man_1.glb")
+useGLTF.preload("/models/man_2.glb")
+useGLTF.preload("/models/woman_4_o.glb")

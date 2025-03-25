@@ -1,4 +1,4 @@
-import { useRef, useState, useCallback, useMemo } from "react"
+import { useRef, useState, useCallback, useMemo, Suspense } from "react"
 import { Canvas, useFrame } from "@react-three/fiber"
 import { SoftShadows, Float, CameraControls, Sky, PerformanceMonitor, Loader, OrbitControls, PointerLockControls, KeyboardControls, useTexture, Environment } from "@react-three/drei"
 import { Physics } from "@react-three/rapier"
@@ -53,38 +53,40 @@ const InidiatorComponent = (props) => {
 
 export default function App() {
   const [bad, set] = useState(false)
-  const { impl, debug, enabled, samples, ...config } = useControls({
-    debug: true,
-    enabled: true,
-    size: { value: 35, min: 0, max: 100, step: 0.1 },
-    focus: { value: 0.5, min: 0, max: 2, step: 0.1 },
-    samples: { value: 16, min: 1, max: 40, step: 1 }
-  })
+  // const { impl, debug, enabled, samples, ...config } = useControls({
+  //   debug: true,
+  //   enabled: true,
+  //   size: { value: 35, min: 0, max: 100, step: 0.1 },
+  //   focus: { value: 0.5, min: 0, max: 2, step: 0.1 },
+  //   samples: { value: 16, min: 1, max: 40, step: 1 }
+  // })
   return (
     <>
-      <KeyboardControls
-        map={[
-          { name: "forward", keys: ["ArrowUp", "w", "W"] },
-          { name: "backward", keys: ["ArrowDown", "s", "S"] },
-          { name: "left", keys: ["ArrowLeft", "a", "A"] },
-          { name: "right", keys: ["ArrowRight", "d", "D"] },
-          { name: "jump", keys: ["Space"] },
-        ]}>
-        <Canvas flat gl={{ alpha: true, stencil: false, antialias: true }}
-          camera={{ position: [1, 2, 20], fov: 50 }}>
-          {debug && <Perf position="top-left" />}
-          <PerformanceMonitor onDecline={() => set(true)} />
-          <ambientLight intensity={1.0} color={'#fff'} />
-          {/* <spotLight intensity={0.5} angle={0.1} penumbra={1} position={[10, 15, -5]} /> */}
-          <Physics gravity={[0, -50, 0]} debug>
-            <Player />
-            <Room/>
-          </Physics>
-          <Sky sunPosition={[100, 20, 100]} />
-          <PointerLockControls />
-          {/* <InidiatorComponent name="indicator_1" position={[1, 0, 0]} /> */}
-        </Canvas>
-      </KeyboardControls>
+      <Suspense fallback={<span>loading...</span>}>
+        <KeyboardControls
+          map={[
+            { name: "forward", keys: ["ArrowUp", "w", "W"] },
+            { name: "backward", keys: ["ArrowDown", "s", "S"] },
+            { name: "left", keys: ["ArrowLeft", "a", "A"] },
+            { name: "right", keys: ["ArrowRight", "d", "D"] },
+            { name: "jump", keys: ["Space"] },
+          ]}>
+          <Canvas flat gl={{ alpha: true, stencil: false, antialias: true }}
+            camera={{ position: [1, 2, 20], fov: 50 }}>
+            <Perf position="top-left" />
+            <PerformanceMonitor onDecline={() => set(true)} />
+            <ambientLight intensity={1.0} color={'#fff'} />
+            {/* <spotLight intensity={0.5} angle={0.1} penumbra={1} position={[10, 15, -5]} /> */}
+            <Physics gravity={[0, -50, 0]} debug>
+              <Player />
+              <Room />
+            </Physics>
+            <Sky sunPosition={[100, 20, 100]} />
+            <PointerLockControls />
+            {/* <InidiatorComponent name="indicator_1" position={[1, 0, 0]} /> */}
+          </Canvas>
+        </KeyboardControls>
+      </Suspense>
     </>
   )
 }
