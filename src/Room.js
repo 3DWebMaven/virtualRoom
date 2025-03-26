@@ -10,11 +10,11 @@ export function Model(props) {
     <>
       <group dispose={null}>
         <primitive object={room.scene} />
+        <mesh scale={1} position={[-5, 10, 47]} rotation={[0, Math.PI, 0]}>
+          <meshBasicMaterial map={videoTexture} side={2} color={'#fff'} />
+          <planeGeometry args={[30, 15]} />
+        </mesh>
         <RigidBody type="fixed" colliders="trimesh">
-          <mesh scale={1} position={[-5, 10, 47]} rotation={[0, Math.PI, 0]}>
-            <meshBasicMaterial map={videoTexture} side={2} color={'#fff'} />
-            <planeGeometry args={[30, 15]} />
-          </mesh>
           <mesh position={[0, 0, -9]} >
             <meshBasicMaterial transparent opacity={0.0} />
             <boxGeometry args={[30, 300, 30]} />
