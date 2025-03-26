@@ -18,10 +18,11 @@ import { easing } from "maath"
 import { Model as Room } from "./Room"
 import { Player } from "./Player"
 import { Html } from "@react-three/drei"
-
+import { slides } from "./config/slide";
 
 export default function App() {
   const [open, setOpen] = useState(false);
+  const [selectdIndicator, setIndicator] = useState(0)
   const pointlockRef = useRef()
 
   const [bad, set] = useState(false)
@@ -43,6 +44,7 @@ export default function App() {
       if (e.distance < near) {
         console.log('e', e)
         // pointlockRef.current.unlock();
+        setIndicator(e.eventObject.name)
         setTimeout(() => {
           pointlockRef.current.unlock();
           setOpen(true)
@@ -83,21 +85,7 @@ export default function App() {
             pointlockRef.current.lock();
           }, 100);
         }}
-        slides={[
-          {
-            src: "../image.webp",
-            alt: "image 1",
-            width: 3840,
-            height: 2560,
-            // srcSet: [
-            //   { src: "../image_icon.png", width: 320, height: 213 },
-            //   { src: "../image_icon.png", width: 640, height: 427 },
-            //   { src: "../image_icon.png", width: 1200, height: 800 },
-            //   { src: "../image_icon.png", width: 2048, height: 1365 },
-            //   { src: "../image_icon.png", width: 3840, height: 2560 },
-            // ],
-          },
-        ]}
+        slides={slides(selectdIndicator)}
         plugins={[Fullscreen, Slideshow, Thumbnails, Video, Zoom]}
       />
 
@@ -123,7 +111,7 @@ export default function App() {
             </Physics>
             <Sky sunPosition={[100, 20, 100]} />
             {!open && <PointerLockControls ref={pointlockRef} />}
-            <InidiatorComponent name="indicator_1" rotation={[0, 2.5, 0]} position={[-41, 3, 35]} />
+            <InidiatorComponent name="2" rotation={[0, 2.5, 0]} position={[-41, 3, 35]} />
           </Suspense>
         </Canvas>
       </KeyboardControls>
