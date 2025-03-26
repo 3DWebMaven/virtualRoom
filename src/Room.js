@@ -4,6 +4,7 @@ import { useRef, useEffect } from 'react'
 import * as THREE from 'three'
 
 export function Model(props) {
+  const wallHeight = 100;
   const room = useGLTF("/showroom_o.glb")
   const videoTexture = useVideoTexture('../intro.webm')
   return (
@@ -17,7 +18,39 @@ export function Model(props) {
         <RigidBody type="fixed" colliders="trimesh">
           <mesh position={[0, 0, -9]} >
             <meshBasicMaterial transparent opacity={0.0} />
-            <boxGeometry args={[30, 300, 30]} />
+            <boxGeometry args={[30, wallHeight, 30]} />
+          </mesh>
+          <mesh position={[0, 0, -50]} >  
+            <meshBasicMaterial transparent opacity={0} />
+            <boxGeometry args={[320, wallHeight, 15]} />
+          </mesh>
+          <mesh position={[0, 0, 50]} >  
+            <meshBasicMaterial transparent opacity={0} />
+            <boxGeometry args={[320, wallHeight, 15]} />
+          </mesh>
+          <mesh position={[48, 0, 0]} >  
+            <meshBasicMaterial transparent opacity={0} />
+            <boxGeometry args={[5, wallHeight, 100]} />
+          </mesh>
+          <mesh position={[41, 0, 0]} >  
+            <meshBasicMaterial transparent opacity={0} />
+            <boxGeometry args={[8, wallHeight, 25]} />
+          </mesh>
+          <mesh position={[-153, 0, 0]} >  
+            <meshBasicMaterial transparent opacity={0} />
+            <boxGeometry args={[5, wallHeight, 100]} />
+          </mesh>
+          <mesh position={[-110, 0, 0]} >  
+            <meshBasicMaterial transparent opacity={0} />
+            <boxGeometry args={[20, wallHeight, 12]} />
+          </mesh>
+          <mesh position={[-54, 0, 34]} >  
+            <meshBasicMaterial transparent opacity={0} />
+            <boxGeometry args={[6, wallHeight, 18]} />
+          </mesh>
+          <mesh position={[-54, 0, -34]} >  
+            <meshBasicMaterial transparent opacity={0} />
+            <boxGeometry args={[6, wallHeight, 18]} />
           </mesh>
         </RigidBody>
       </group>
