@@ -1,3 +1,13 @@
+import * as React from "react";
+import Lightbox from "yet-another-react-lightbox";
+import "yet-another-react-lightbox/styles.css";
+import Fullscreen from "yet-another-react-lightbox/plugins/fullscreen";
+import Slideshow from "yet-another-react-lightbox/plugins/slideshow";
+import Thumbnails from "yet-another-react-lightbox/plugins/thumbnails";
+import Video from "yet-another-react-lightbox/plugins/video";
+import Zoom from "yet-another-react-lightbox/plugins/zoom";
+import "yet-another-react-lightbox/plugins/thumbnails.css";
+
 import { useRef, useState, useCallback, useMemo, Suspense } from "react"
 import { Canvas, useFrame } from "@react-three/fiber"
 import { SoftShadows, Float, CameraControls, Sky, PerformanceMonitor, Loader, OrbitControls, PointerLockControls, KeyboardControls, useTexture, Environment } from "@react-three/drei"
@@ -9,71 +19,95 @@ import { Model as Room } from "./Room"
 import { Player } from "./Player"
 import { Html } from "@react-three/drei"
 
-const InidiatorComponent = (props) => {
-  const near = 8;
-  const [hover, set] = useState(null)
-  const texture = useTexture('../image_icon.png')
-
-  const onMove = useCallback((e) => {
-    e.stopPropagation()
-    if (e.distance < near) {
-      set(e.eventObject.name)
-    }
-  }, [])
-  const onOut = useCallback(() => set(null), [])
-  const onClick = useCallback((e) => {
-    e.stopPropagation()
-    if (e.distance < near) {
-      console.log('e', e)
-    }
-  }, [])
-
-  return (
-    <mesh
-      name={props.name}
-      position={props.position}
-      scale={hover === props.name ? 2 : 1}
-      onPointerMove={onMove}
-      onPointerOut={onOut}
-      onClick={onClick}>
-      <meshBasicMaterial
-        map={texture}
-        transparent={true}
-        side={2}
-        // Additional controls:
-        color={"#fff"} // Tint the texture
-        opacity={1} // Control transparency
-        depthTest={true} // Whether to test against depth buffer
-        depthWrite={true} // Whether to write to depth buffer
-      />
-      <circleGeometry args={[0.3, 32]} /> {/* radius = 1, segments = 32 */}
-    </mesh>
-  )
-}
 
 export default function App() {
+  const [open, setOpen] = useState(false);
+  const pointlockRef = useRef()
+
   const [bad, set] = useState(false)
-  // const { impl, debug, enabled, samples, ...config } = useControls({
-  //   debug: true,
-  //   enabled: true,
-  //   size: { value: 35, min: 0, max: 100, step: 0.1 },
-  //   focus: { value: 0.5, min: 0, max: 2, step: 0.1 },
-  //   samples: { value: 16, min: 1, max: 40, step: 1 }
-  // })
+
+  const InidiatorComponent = (props) => {
+    const near = 16;
+    const [hover, set] = useState(null)
+    const texture = useTexture('../image_icon.png')
+
+    const onMove = useCallback((e) => {
+      e.stopPropagation()
+      if (e.distance < near) {
+        set(e.eventObject.name)
+      }
+    }, [])
+    const onOut = useCallback(() => set(null), [])
+    const onClick = useCallback((e) => {
+      e.stopPropagation()
+      if (e.distance < near) {
+        console.log('e', e)
+        // pointlockRef.current.unlock();
+        setTimeout(() => {
+          pointlockRef.current.unlock();
+          setOpen(true)
+        },100);
+      }
+    }, [])
+
+    return (
+      <mesh
+        name={props.name}
+        position={props.position}
+        rotation={props.rotation}
+        scale={hover === props.name ? 2 : 1}
+        onPointerMove={onMove}
+        onPointerOut={onOut}
+        onClick={onClick}>
+        <meshBasicMaterial
+          map={texture}
+          transparent={true}
+          side={2}
+          // Additional controls:
+          color={"#fff"} // Tint the texture
+          opacity={1} // Control transparency
+          depthTest={true} // Whether to test against depth buffer
+          depthWrite={true} // Whether to write to depth buffer
+        />
+        <circleGeometry args={[0.8, 32]} /> {/* radius = 1, segments = 32 */}
+      </mesh>
+    )
+  }
   return (
     <>
-      <KeyboardControls
-        map={[
-          { name: "forward", keys: ["ArrowUp", "w", "W"] },
-          { name: "backward", keys: ["ArrowDown", "s", "S"] },
-          { name: "left", keys: ["ArrowLeft", "a", "A"] },
-          { name: "right", keys: ["ArrowRight", "d", "D"] },
-          { name: "jump", keys: ["Space"] },
-        ]}>
-        <Canvas flat gl={{ alpha: true, stencil: false, antialias: true }}
-          camera={{ position: [1, 2, 20], fov: 50 }}>
-          <Suspense >
-            <Perf position="top-left" />
+      <Lightbox
+        open={open}
+        close={() => setOpen(false)}
+        slides={[
+          {
+            src: "../image.webp",
+            alt: "image 1",
+            width: 3840,
+            height: 2560,
+            // srcSet: [
+            //   { src: "../image_icon.png", width: 320, height: 213 },
+            //   { src: "../image_icon.png", width: 640, height: 427 },
+            //   { src: "../image_icon.png", width: 1200, height: 800 },
+            //   { src: "../image_icon.png", width: 2048, height: 1365 },
+            //   { src: "../image_icon.png", width: 3840, height: 2560 },
+            // ],
+          },
+        ]}
+        plugins={[Fullscreen, Slideshow, Thumbnails, Video, Zoom]}
+      />
+
+      <Suspense fallback={<span>loading...</span>}>
+        <KeyboardControls
+          map={[
+            { name: "forward", keys: ["ArrowUp", "w", "W"] },
+            { name: "backward", keys: ["ArrowDown", "s", "S"] },
+            { name: "left", keys: ["ArrowLeft", "a", "A"] },
+            { name: "right", keys: ["ArrowRight", "d", "D"] },
+            { name: "jump", keys: ["Space"] },
+          ]}>
+          <Canvas flat gl={{ alpha: true, stencil: false, antialias: true }}
+            camera={{ position: [1, 2, 20], fov: 50 }}>
+            <Perf position="top-right" />
             <PerformanceMonitor onDecline={() => set(true)} />
             <ambientLight intensity={1.0} color={'#fff'} />
             {/* <spotLight intensity={0.5} angle={0.1} penumbra={1} position={[10, 15, -5]} /> */}
@@ -82,11 +116,11 @@ export default function App() {
               <Room />
             </Physics>
             <Sky sunPosition={[100, 20, 100]} />
-            <PointerLockControls />
-            {/* <InidiatorComponent name="indicator_1" position={[1, 0, 0]} /> */}
-          </Suspense>
-        </Canvas>
-      </KeyboardControls>
+            {!open && <PointerLockControls ref={pointlockRef} />}
+            <InidiatorComponent name="indicator_1" rotation={[0, 2.5, 0]} position={[-41, 3, 35]} />
+          </Canvas>
+        </KeyboardControls>
+      </Suspense>
     </>
   )
 }
