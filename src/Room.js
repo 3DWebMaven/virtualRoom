@@ -67,7 +67,7 @@ function AnimatedModel(props) {
   />
 }
 
-useGLTF.preload("/showroom2.glb")
+useGLTF.preload("/showroom.glb")
 useGLTF.preload("/models/woman_2_o.glb")
 useGLTF.preload("/models/woman_3_o.glb")
 useGLTF.preload("/models/man_1.glb")
