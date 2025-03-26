@@ -62,31 +62,31 @@ export default function App() {
   // })
   return (
     <>
-      <Suspense fallback={<span>loading...</span>}>
-        <KeyboardControls
-          map={[
-            { name: "forward", keys: ["ArrowUp", "w", "W"] },
-            { name: "backward", keys: ["ArrowDown", "s", "S"] },
-            { name: "left", keys: ["ArrowLeft", "a", "A"] },
-            { name: "right", keys: ["ArrowRight", "d", "D"] },
-            { name: "jump", keys: ["Space"] },
-          ]}>
-          <Canvas flat gl={{ alpha: true, stencil: false, antialias: true }}
-            camera={{ position: [1, 2, 20], fov: 50 }}>
+      <KeyboardControls
+        map={[
+          { name: "forward", keys: ["ArrowUp", "w", "W"] },
+          { name: "backward", keys: ["ArrowDown", "s", "S"] },
+          { name: "left", keys: ["ArrowLeft", "a", "A"] },
+          { name: "right", keys: ["ArrowRight", "d", "D"] },
+          { name: "jump", keys: ["Space"] },
+        ]}>
+        <Canvas flat gl={{ alpha: true, stencil: false, antialias: true }}
+          camera={{ position: [1, 2, 20], fov: 50 }}>
+          <Suspense >
             <Perf position="top-left" />
             <PerformanceMonitor onDecline={() => set(true)} />
             <ambientLight intensity={1.0} color={'#fff'} />
             {/* <spotLight intensity={0.5} angle={0.1} penumbra={1} position={[10, 15, -5]} /> */}
-            <Physics gravity={[0, -50, 0]} debug>
+            <Physics gravity={[0, 0, 0]} debug>
               <Player />
               <Room />
             </Physics>
             <Sky sunPosition={[100, 20, 100]} />
             <PointerLockControls />
             {/* <InidiatorComponent name="indicator_1" position={[1, 0, 0]} /> */}
-          </Canvas>
-        </KeyboardControls>
-      </Suspense>
+          </Suspense>
+        </Canvas>
+      </KeyboardControls>
     </>
   )
 }
