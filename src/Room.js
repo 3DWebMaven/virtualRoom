@@ -15,7 +15,7 @@ export function Model(props) {
           <meshBasicMaterial map={videoTexture} side={2} color={'#fff'} />
           <planeGeometry args={[30, 15]} />
         </mesh>
-        <RigidBody type="fixed" colliders="trimesh">
+        <RigidBody type="fixed" colliders="cuboid">
           <mesh position={[0, 0, -9]} >
             <meshBasicMaterial transparent opacity={0.0} />
             <boxGeometry args={[30, wallHeight, 30]} />
