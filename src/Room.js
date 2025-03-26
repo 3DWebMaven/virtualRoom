@@ -4,30 +4,30 @@ import { useRef, useEffect } from 'react'
 import * as THREE from 'three'
 
 export function Model(props) {
-  const room = useGLTF("/showroom.glb")
+  const room = useGLTF("/showroom_o.glb")
   const videoTexture = useVideoTexture('../intro.webm')
   return (
     <>
       <group dispose={null}>
+        <primitive object={room.scene} />
         <RigidBody type="fixed" colliders="trimesh">
-          <primitive object={room.scene} />
           <mesh scale={1} position={[-5, 10, 47]} rotation={[0, Math.PI, 0]}>
             <meshBasicMaterial map={videoTexture} side={2} color={'#fff'} />
             <planeGeometry args={[30, 15]} />
           </mesh>
           <mesh position={[0, 0, -9]} >
             <meshBasicMaterial transparent opacity={0.0} />
-            <boxGeometry args={[30, 300, 30]}/>
+            <boxGeometry args={[30, 300, 30]} />
           </mesh>
         </RigidBody>
       </group>
       <group dispose={null}>
-        <AnimatedModel rotation={[0, 2, 0]} position={[-80, -5, 20]} scale={4.5} url={"/models/woman_3_o.glb"} />
+        {/* <AnimatedModel rotation={[0, 2, 0]} position={[-80, -5, 20]} scale={4.5} url={"/models/woman_3_o.glb"} />
         <AnimatedModel rotation={[0, 2, 0]} position={[-90, -5, 25]} scale={4.5} url={"/models/woman_2_o.glb"} />
         <AnimatedModel rotation={[0, 1.5, 0]} position={[-130, -5, 0]} scale={4.5} url={"/models/woman_4_o.glb"} />
-        <AnimatedModel rotation={[0, 3, 0]} position={[-85, -5, -30]} scale={9} url={"/models/woman_1.glb"} />
-        <AnimatedModel rotation={[0, -0.5, 0]} position={[-30, -5, 25]} scale={8} url={"/models/man_1.glb"} />
-        <AnimatedModel rotation={[0, 2.5, 0]} position={[-110, -5, -25]} scale={3.8} url={"/models/man_2.glb"} />
+        <AnimatedModel rotation={[0, 3, 0]} position={[-85, -5, -30]} scale={9} url={"/models/woman_1_o.glb"} />
+        <AnimatedModel rotation={[0, -0.5, 0]} position={[-30, -5, 25]} scale={8} url={"/models/man_1_o.glb"} />
+        <AnimatedModel rotation={[0, 2.5, 0]} position={[-110, -5, -25]} scale={3.8} url={"/models/man_2_o.glb"} /> */}
       </group>
     </>
   )
@@ -67,9 +67,10 @@ function AnimatedModel(props) {
   />
 }
 
-useGLTF.preload("/showroom2.glb")
+useGLTF.preload("/showroom_o.glb")
 useGLTF.preload("/models/woman_2_o.glb")
 useGLTF.preload("/models/woman_3_o.glb")
-useGLTF.preload("/models/man_1.glb")
-useGLTF.preload("/models/man_2.glb")
+useGLTF.preload("/models/man_1_o.glb")
+useGLTF.preload("/models/man_2_o.glb")
 useGLTF.preload("/models/woman_4_o.glb")
+useGLTF.preload("/models/woman_1_o.glb")
