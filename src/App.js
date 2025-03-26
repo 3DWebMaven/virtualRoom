@@ -18,7 +18,7 @@ import { easing } from "maath"
 import { Model as Room } from "./Room"
 import { Player } from "./Player"
 import { Html } from "@react-three/drei"
-import { slides } from "./config/slide";
+import { slides } from "./config/config";
 
 export default function App() {
   const [open, setOpen] = useState(false);

@@ -9,6 +9,13 @@ export const slides = (selectedID) => {
         })
     }
     slide = [slide[selectedID - 1], ...slide.filter(item => item !== selectedID)];
-    console.log("slide", selectedID)
     return slide;
 }
+
+export const indicatorProps = [
+    {
+        name: "1",
+        rotation: [0, 2.5, 0],
+        position: [-38, 3, 35]
+    },
+]
