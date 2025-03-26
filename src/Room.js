@@ -55,7 +55,7 @@ export function Model(props) {
         </RigidBody>
       </group>
       <group dispose={null}>
-        {/* <AnimatedModel rotation={[0, 2, 0]} position={[-80, -5, 20]} scale={4.5} url={"/models/woman_3_o.glb"} />
+       <AnimatedModel rotation={[0, 2, 0]} position={[-80, -5, 20]} scale={4.5} url={"/models/woman_3_o.glb"} />
         <AnimatedModel rotation={[0, 2, 0]} position={[-90, -5, 25]} scale={4.5} url={"/models/woman_2_o.glb"} />
         <AnimatedModel rotation={[0, 1.5, 0]} position={[-130, -5, 0]} scale={4.5} url={"/models/woman_4_o.glb"} />
         <AnimatedModel rotation={[0, 3, 0]} position={[-85, -5, -30]} scale={9} url={"/models/woman_1.glb"} />
