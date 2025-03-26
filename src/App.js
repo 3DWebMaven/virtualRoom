@@ -10,7 +10,7 @@ import "yet-another-react-lightbox/plugins/thumbnails.css";
 
 import { useRef, useState, useCallback, useMemo, Suspense } from "react"
 import { Canvas, useFrame } from "@react-three/fiber"
-import { SoftShadows, Float, CameraControls, Sky, PerformanceMonitor, Loader, OrbitControls, PointerLockControls, KeyboardControls, useTexture, Environment } from "@react-three/drei"
+import { SoftShadows, Float, CameraControls, Sky, PerformanceMonitor, Loader, OrbitControls, PointerLockControls, KeyboardControls, useTexture, Environment, Preload } from "@react-three/drei"
 import { Physics } from "@react-three/rapier"
 import { useControls } from "leva"
 import { Perf } from "r3f-perf"
@@ -46,7 +46,7 @@ export default function App() {
         setTimeout(() => {
           pointlockRef.current.unlock();
           setOpen(true)
-        },100);
+        }, 100);
       }
     }, [])
 
@@ -96,17 +96,18 @@ export default function App() {
         plugins={[Fullscreen, Slideshow, Thumbnails, Video, Zoom]}
       />
 
-      <Suspense fallback={<span>loading...</span>}>
-        <KeyboardControls
-          map={[
-            { name: "forward", keys: ["ArrowUp", "w", "W"] },
-            { name: "backward", keys: ["ArrowDown", "s", "S"] },
-            { name: "left", keys: ["ArrowLeft", "a", "A"] },
-            { name: "right", keys: ["ArrowRight", "d", "D"] },
-            { name: "jump", keys: ["Space"] },
-          ]}>
-          <Canvas flat gl={{ alpha: true, stencil: false, antialias: true }}
-            camera={{ position: [1, 2, 20], fov: 50 }}>
+      <KeyboardControls
+        map={[
+          { name: "forward", keys: ["ArrowUp", "w", "W"] },
+          { name: "backward", keys: ["ArrowDown", "s", "S"] },
+          { name: "left", keys: ["ArrowLeft", "a", "A"] },
+          { name: "right", keys: ["ArrowRight", "d", "D"] },
+          { name: "jump", keys: ["Space"] },
+        ]}>
+        <Canvas flat gl={{ alpha: true, stencil: false, antialias: true }}
+          camera={{ position: [1, 2, 20], fov: 50 }}>
+          <Suspense>
+            <Preload all />
             <Perf position="top-right" />
             <PerformanceMonitor onDecline={() => set(true)} />
             <ambientLight intensity={1.0} color={'#fff'} />
@@ -118,9 +119,9 @@ export default function App() {
             <Sky sunPosition={[100, 20, 100]} />
             {!open && <PointerLockControls ref={pointlockRef} />}
             <InidiatorComponent name="indicator_1" rotation={[0, 2.5, 0]} position={[-41, 3, 35]} />
-          </Canvas>
-        </KeyboardControls>
-      </Suspense>
+          </Suspense>
+        </Canvas>
+      </KeyboardControls>
     </>
   )
 }
