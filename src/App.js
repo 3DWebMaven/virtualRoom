@@ -77,7 +77,12 @@ export default function App() {
     <>
       <Lightbox
         open={open}
-        close={() => setOpen(false)}
+        close={() => { 
+          setOpen(false);
+          setTimeout(() => {
+            pointlockRef.current.lock();
+          }, 100);
+        }}
         slides={[
           {
             src: "../image.webp",
