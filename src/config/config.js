@@ -1,7 +1,7 @@
 export const slides = (selectedID) => {
 
     let slide = []
-    const imageCount = 17;
+    const imageCount = 18;
     if (selectedID == 1) {
         return slide = [
             {
@@ -118,5 +118,10 @@ export const INITIATOR_CONFIGS = [
         name: "17",
         rotation: [0, 2.5, 0],
         position: [-66.5, indicatorYpos - 2, -39]
+    },
+    {
+        name: "18",
+        rotation: [0, Math.PI/2, 0],
+        position: [-57.3, indicatorYpos + 3, 39]
     }
 ]
