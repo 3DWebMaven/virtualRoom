@@ -104,13 +104,13 @@ export default function App() {
             <Perf position="top-right" />
             <PerformanceMonitor onDecline={() => set(true)} />
             <ambientLight intensity={1.0} color={'#fff'} />
-            {/* <spotLight intensity={0.5} angle={0.1} penumbra={1} position={[10, 15, -5]} /> */}
             <Physics gravity={[0, 0, 0]} debug>
               <Player />
               <Room />
             </Physics>
             <Sky sunPosition={[100, 20, 100]} />
             {!open && <PointerLockControls ref={pointlockRef} />}
+           
             {INITIATOR_CONFIGS.map(config => (
               <InidiatorComponent
                 key={config.name}
