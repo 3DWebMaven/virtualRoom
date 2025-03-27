@@ -18,7 +18,7 @@ import { easing } from "maath"
 import { Model as Room } from "./Room"
 import { Player } from "./Player"
 import { Html } from "@react-three/drei"
-import { slides } from "./config/config";
+import { INITIATOR_CONFIGS, slides } from "./config/config";
 
 export default function App() {
   const [open, setOpen] = useState(false);
@@ -79,7 +79,7 @@ export default function App() {
     <>
       <Lightbox
         open={open}
-        close={() => { 
+        close={() => {
           setOpen(false);
           setTimeout(() => {
             pointlockRef.current.lock();
@@ -111,7 +111,12 @@ export default function App() {
             </Physics>
             <Sky sunPosition={[100, 20, 100]} />
             {!open && <PointerLockControls ref={pointlockRef} />}
-            <InidiatorComponent name="2" rotation={[0, 2.5, 0]} position={[-41, 3, 35]} />
+            {INITIATOR_CONFIGS.map(config => (
+              <InidiatorComponent
+                key={config.name}
+                {...config}
+              />
+            ))}
           </Suspense>
         </Canvas>
       </KeyboardControls>

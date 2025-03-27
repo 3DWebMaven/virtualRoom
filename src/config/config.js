@@ -12,10 +12,20 @@ export const slides = (selectedID) => {
     return slide;
 }
 
-export const indicatorProps = [
+export const INITIATOR_CONFIGS = [
     {
         name: "1",
         rotation: [0, 2.5, 0],
-        position: [-38, 3, 35]
+        position: [-41, 3, 35]
     },
+    {
+        name: "2",
+        rotation: [0, Math.PI, 0],
+        position: [-85.5, 6, 42]
+    },
+    {
+        name: "3",
+        rotation: [0, Math.PI, 0],
+        position: [-96.5, 6, 42]
+    }
 ]
