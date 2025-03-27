@@ -22,13 +22,14 @@ export const slides = (selectedID) => {
               },
         ]
     } else {
-        for (let i = 2; i <= imageCount; i++) {
+        for (let i = 1; i <= imageCount; i++) {
             slide.push({
                 src: "../images/" + i + ".webp"
             })
         }
-        slide = [slide[selectedID - 1], ...slide.filter(item => item !== selectedID)];
-        return slide;
+        console.log('slide[selectedID ]: ',selectedID, slide[selectedID ]);
+        if (selectedID === -1) return slide;
+        return [...slide.slice(selectedID -1 ), ...slide.slice(0, selectedID)];
     }
 }
 const indicatorYpos = 6;
