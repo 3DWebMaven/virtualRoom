@@ -24,6 +24,7 @@ export default function App() {
   const [open, setOpen] = useState(false);
   const [selectdIndicator, setIndicator] = useState(0)
   const pointlockRef = useRef()
+  const [showFAQ, setShowFAQ] = useState(false)
 
   const [bad, set] = useState(false)
 
@@ -42,7 +43,6 @@ export default function App() {
     const onClick = useCallback((e) => {
       e.stopPropagation()
       if (e.distance < near) {
-        console.log('e', e)
         // pointlockRef.current.unlock();
         setIndicator(e.eventObject.name)
         setTimeout(() => {
@@ -77,6 +77,7 @@ export default function App() {
   }
   return (
     <>
+      {showFAQ && <div>asdasdasdasdasdasdaasd</div>}
       <Lightbox
         open={open}
         close={() => {
@@ -106,11 +107,11 @@ export default function App() {
             <ambientLight intensity={1.0} color={'#fff'} />
             <Physics gravity={[0, 0, 0]} debug>
               <Player />
-              <Room />
+              <Room setShowFAQ={setShowFAQ} />
             </Physics>
             <Sky sunPosition={[100, 20, 100]} />
             {!open && <PointerLockControls ref={pointlockRef} />}
-           
+
             {INITIATOR_CONFIGS.map(config => (
               <InidiatorComponent
                 key={config.name}
