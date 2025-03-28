@@ -35,6 +35,11 @@ export const slides = (selectedID) => {
 const indicatorYpos = 6;
 export const INITIATOR_CONFIGS = [
     {
+        name: "employee",
+        rotation: [0, -2.5, 0],
+        position: [-49, indicatorYpos + 7.5, -18]
+    },
+    {
         name: "1",
         rotation: [0, 2.5, 0],
         position: [-41, indicatorYpos, 35]

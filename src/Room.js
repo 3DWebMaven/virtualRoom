@@ -7,6 +7,16 @@ export function Model(props) {
   const wallHeight = 100;
   const room = useGLTF("/showroom_o.glb")
   const videoTexture = useVideoTexture('../intro.webm')
+  const npcModels = [
+    { rotation: [0, 0.1, 0], position: [-108, -5, 30], scale: 10, url: "/models/woman_5_o.glb" },
+    { rotation: [0, 1.5, 0], position: [-130, -5, 0], scale: 4.5, url: "/models/woman_4_o.glb" },
+    { rotation: [0, 3, 0], position: [-87, -5, -30], scale: 9, url: "/models/man_3_o.glb" },
+    { rotation: [0, -0.5, 0], position: [-30, -5, 25], scale: 0.1, url: "/models/man_4_o.glb" },
+    { rotation: [0, 2.5, 0], position: [-110, -5, -25], scale: 3.8, url: "/models/man_2_o.glb" },
+    { rotation: [0, 0, 0], position: [-50, -5, -18], scale: 9.5, url: "/models/employee.glb" },
+    { rotation: [0, 2, 0], position: [-90, -5, 25], scale: 10, url: "/models/woman_6_o.glb"} 
+  ];
+
   return (
     <>
       <group dispose={null}>
@@ -55,14 +65,15 @@ export function Model(props) {
         </RigidBody>
       </group>
       <group dispose={null}>
-        {/* <AnimatedModel rotation={[0, 2, 0]} position={[-80, -5, 20]} scale={4.5} url={"/models/woman_3_o.glb"} /> */}
-        <AnimatedModel rotation={[0, 0.1, 0]} position={[-108, -5, 30]} scale={10} url={"/models/woman_5_o.glb"} />
-        {/* <AnimatedModel rotation={[0, 2, 0]} position={[-90, -5, 25]} scale={10} url={"/models/woman_6_o.glb"} /> */}
-        <AnimatedModel rotation={[0, 1.5, 0]} position={[-130, -5, 0]} scale={4.5} url={"/models/woman_4_o.glb"} />
-        <AnimatedModel rotation={[0, 3, 0]} position={[-87, -5, -30]} scale={9} url={"/models/man_3_o.glb"} />
-        <AnimatedModel rotation={[0, -0.5, 0]} position={[-30, -5, 25]} scale={0.1} url={"/models/man_4_o.glb"} />
-        <AnimatedModel rotation={[0, 2.5, 0]} position={[-110, -5, -25]} scale={3.8} url={"/models/man_2_o.glb"} />
-        <AnimatedModel rotation={[0, 0, 0]} position={[-50, -5, -18]} scale={9.5} url={"/models/employee.glb"} employee={true} setShowFAQ={props.setShowFAQ} />
+        {npcModels.map((model, index) => (
+          <AnimatedModel
+            key={index}
+            rotation={model.rotation}
+            position={model.position}
+            scale={model.scale}
+            url={model.url}
+          />
+        ))}
       </group>
     </>
   )
@@ -74,12 +85,6 @@ function AnimatedModel(props) {
   const { nodes, scene, animations } = useGLTF(props.url)
   const { actions } = useAnimations(animations, group)
   const near = 16
-  const onClick = useCallback((e) => {
-    e.stopPropagation()
-    if (e.distance < near) {
-      props.setShowFAQ(true)
-    }
-  }, [])
 
   useEffect(() => {
     // Check if animations exist
@@ -101,24 +106,15 @@ function AnimatedModel(props) {
     }
   }, [actions, animations])
 
-  return (<>
+  return (
     <primitive
-      onClick={onClick}
       ref={group}
       object={scene}
       position={props.position}
       scale={props.scale}
       rotation={props.rotation}
-    >
-      {props.employee && <HtmlMarker />}
-    </primitive>
-  </>)
-}
-
-const HtmlMarker = () => {
-  return <Html transform position={[0, 2, 0]} rotation={[0, Math.PI / 2, 0]}>
-    <span>Click Me!</span>
-  </Html>
+    />
+  )
 }
 
 

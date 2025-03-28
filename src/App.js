@@ -31,46 +31,45 @@ export default function App() {
   // const [showFAQ, setShowFAQ] = useState(false)
   const [show, setShow] = useState(false);
   const [bad, set] = useState(false)
+ 
   const onModalHide = () => {
     setShow(false);
     setTimeout(() => {
       pointlockRef.current.lock();
     }, 100);
   }
-
-  useEffect(() => {
-    if(show == true ) {
-      console.log(show)
-      setTimeout(() => {
-        pointlockRef.current.unlock();
-      }, 100);
-    }
-  }, [show])
+  const onESCkeyInModal = () => {
+    setShow(false);
+    setTimeout(() => {
+      pointlockRef.current.lock();
+    }, 100);
+  }
 
   const InidiatorComponent = (props) => {
     const near = 16;
     const [hover, set] = useState(null)
-    const texture = useTexture('../image_icon.png')
+    const texture = useTexture(props.name === "employee" ? '../employee_icon.png' : '../image_icon.png');
+
+
+    const handleDistanceCheck = (e) => e.distance < near;
 
     const onMove = useCallback((e) => {
-      e.stopPropagation()
-      if (e.distance < near) {
-        set(e.eventObject.name)
-      }
-    }, [])
-    const onOut = useCallback(() => set(null), [])
+      e.stopPropagation();
+      if (handleDistanceCheck(e)) set(e.eventObject.name);
+    }, []);
+    
+    const onOut = useCallback(() => set(null), []);
+    
     const onClick = useCallback((e) => {
-      e.stopPropagation()
-      if (e.distance < near) {
-        // pointlockRef.current.unlock();
-        console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
-        setIndicator(e.eventObject.name)
+      e.stopPropagation();
+      if (handleDistanceCheck(e)) {
+        setIndicator(e.eventObject.name);
         setTimeout(() => {
           pointlockRef.current.unlock();
-          setOpen(true)
+          props.name === "employee" ? setShow(true) : setOpen(true);
         }, 100);
       }
-    }, [])
+    }, []);
 
     return (
       <mesh
@@ -95,11 +94,15 @@ export default function App() {
       </mesh>
     )
   }
+  useEffect(()=> {
+    console.log(show)
+  })
+
   return (
     <>
-      <Modal show={show} fullscreen={true} onHide={() => onModalHide()}>
+      <Modal onEscapeKeyDown ={() => onESCkeyInModal()}  backdrop = "static" show={show} fullscreen={false} onHide={() => onModalHide()}>
         <Modal.Header closeButton>
-          <Modal.Title>Modal</Modal.Title>
+          <Modal.Title>Q&A</Modal.Title>
         </Modal.Header>
         <Modal.Body>Modal body content</Modal.Body>
       </Modal>
@@ -134,12 +137,11 @@ export default function App() {
             <ambientLight intensity={1.0} color={'#fff'} />
             <Physics gravity={[0, 0, 0]} debug>
               <Player />
-              <Room setShowFAQ={setShow}/>
+              <Room setShowFAQ={setShow} />
             </Physics>
             <Sky sunPosition={[100, 20, 100]} />
 
             {show || !open && <PointerLockControls ref={pointlockRef} />}
-            {/* <PointerLockControls ref={pointlockRef} /> */}
 
             {INITIATOR_CONFIGS.map(config => (
               <InidiatorComponent
