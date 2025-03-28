@@ -4,7 +4,6 @@ import { useRef, useEffect, useCallback } from 'react'
 import * as THREE from 'three'
 
 export function Model(props) {
-  console.log('props: ', props.setShowFAQ);
   const wallHeight = 100;
   const room = useGLTF("/showroom_o.glb")
   const videoTexture = useVideoTexture('../intro.webm')
@@ -78,13 +77,7 @@ function AnimatedModel(props) {
   const onClick = useCallback((e) => {
     e.stopPropagation()
     if (e.distance < near) {
-      console.log('e', props.setShowFAQ)
-      // pointlockRef.current.unlock();
       props.setShowFAQ(true)
-      // setTimeout(() => {
-      //   pointlockRef.current.unlock();
-
-      // }, 100);
     }
   }, [])
 

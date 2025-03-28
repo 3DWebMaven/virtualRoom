@@ -20,13 +20,32 @@ import { Player } from "./Player"
 import { Html } from "@react-three/drei"
 import { INITIATOR_CONFIGS, slides } from "./config/config";
 
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
+import "bootstrap/dist/css/bootstrap.min.css"
+import { useEffect } from "react";
 export default function App() {
   const [open, setOpen] = useState(false);
   const [selectdIndicator, setIndicator] = useState(0)
   const pointlockRef = useRef()
-  const [showFAQ, setShowFAQ] = useState(false)
-
+  // const [showFAQ, setShowFAQ] = useState(false)
+  const [show, setShow] = useState(false);
   const [bad, set] = useState(false)
+  const onModalHide = () => {
+    setShow(false);
+    setTimeout(() => {
+      pointlockRef.current.lock();
+    }, 100);
+  }
+
+  useEffect(() => {
+    if(show == true ) {
+      console.log(show)
+      setTimeout(() => {
+        pointlockRef.current.unlock();
+      }, 100);
+    }
+  }, [show])
 
   const InidiatorComponent = (props) => {
     const near = 16;
@@ -44,6 +63,7 @@ export default function App() {
       e.stopPropagation()
       if (e.distance < near) {
         // pointlockRef.current.unlock();
+        console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
         setIndicator(e.eventObject.name)
         setTimeout(() => {
           pointlockRef.current.unlock();
@@ -77,7 +97,14 @@ export default function App() {
   }
   return (
     <>
-      {showFAQ && <div>asdasdasdasdasdasdaasd</div>}
+      <Modal show={show} fullscreen={true} onHide={() => onModalHide()}>
+        <Modal.Header closeButton>
+          <Modal.Title>Modal</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Modal body content</Modal.Body>
+      </Modal>
+
+
       <Lightbox
         open={open}
         close={() => {
@@ -102,15 +129,17 @@ export default function App() {
           camera={{ position: [1, 2, 20], fov: 50 }}>
           <Suspense>
             <Preload all />
-            <Perf position="top-right" />
+            <Perf position="top-left" />
             <PerformanceMonitor onDecline={() => set(true)} />
             <ambientLight intensity={1.0} color={'#fff'} />
             <Physics gravity={[0, 0, 0]} debug>
               <Player />
-              <Room setShowFAQ={setShowFAQ} />
+              <Room setShowFAQ={setShow}/>
             </Physics>
             <Sky sunPosition={[100, 20, 100]} />
-            {!open && <PointerLockControls ref={pointlockRef} />}
+
+            {show || !open && <PointerLockControls ref={pointlockRef} />}
+            {/* <PointerLockControls ref={pointlockRef} /> */}
 
             {INITIATOR_CONFIGS.map(config => (
               <InidiatorComponent
