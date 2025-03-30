@@ -11,7 +11,17 @@ const Subject = ({ title, data, contentRefs }) => {
               <Accordion.Header>
                 <p className="item-title">{item?.title}</p>
               </Accordion.Header>
-              <Accordion.Body>{item?.content ? <p className="item-content">{item?.content}</p> : <div className="no-data">NO CONTENT</div>}</Accordion.Body>
+              <Accordion.Body>
+                {item?.content?.length ? (
+                  <ul style={{ marginBottom: "0" }}>
+                    {item?.content.map((text, index) => (
+                      <li key={`key-${index}`} className="text-item" dangerouslySetInnerHTML={{ __html: text }}></li>
+                    ))}
+                  </ul>
+                ) : (
+                  <div className="no-data">NO CONTENT</div>
+                )}
+              </Accordion.Body>
             </Accordion.Item>
           ))}
         </Accordion>

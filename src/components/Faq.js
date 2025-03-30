@@ -21,7 +21,7 @@ const Faq = () => {
 
       for (let i = contentElements.length - 1; i >= 0; i--) {
         const element = contentElements[i]
-        const elementTop = element.getBoundingClientRect().top - containerTop
+        const elementTop = element?.getBoundingClientRect().top - containerTop
 
         if (elementTop <= 100) {
           // 100px buffer from top
