@@ -17,6 +17,7 @@ import { Perf } from "r3f-perf"
 import { easing } from "maath"
 import { Model as Room } from "./Room"
 import { Player } from "./Player"
+import Faq from "./components/Faq"
 import { Html } from "@react-three/drei"
 import { INITIATOR_CONFIGS, slides } from "./config/config";
 
@@ -100,11 +101,11 @@ export default function App() {
 
   return (
     <>
-      <Modal onEscapeKeyDown ={() => onESCkeyInModal()}  backdrop = "static" show={show} fullscreen={false} onHide={() => onModalHide()}>
+      <Modal size="xl" onEscapeKeyDown ={() => onESCkeyInModal()}  backdrop = "static" show={show} fullscreen={false} onHide={() => onModalHide()}>
         <Modal.Header closeButton>
           <Modal.Title>Q&A</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Modal body content</Modal.Body>
+        <Modal.Body><Faq /></Modal.Body>
       </Modal>
 
 

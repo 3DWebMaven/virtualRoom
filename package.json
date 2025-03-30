@@ -20,6 +20,7 @@
     "yet-another-react-lightbox": "^3.21.8"
   },
   "devDependencies": {
+    "ajv": "^7.2.4",
     "typescript": "3.3.3"
   },
   "scripts": {
