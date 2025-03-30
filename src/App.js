@@ -101,7 +101,7 @@ export default function App() {
 
   return (
     <>
-      <Modal size="xl" onEscapeKeyDown ={() => onESCkeyInModal()}  backdrop = "static" show={true || show} fullscreen={false} onHide={() => onModalHide()}>
+      <Modal size="xl" onEscapeKeyDown ={() => onESCkeyInModal()}  backdrop = "static" show={show} fullscreen={false} onHide={() => onModalHide()}>
         <Modal.Header closeButton>
           <Modal.Title>Q&A</Modal.Title>
         </Modal.Header>
@@ -109,7 +109,7 @@ export default function App() {
       </Modal>
 
 
-      {/* <Lightbox
+      <Lightbox
         open={open}
         close={() => {
           setOpen(false);
@@ -119,7 +119,7 @@ export default function App() {
         }}
         slides={slides(selectdIndicator)}
         plugins={[Fullscreen, Slideshow, Thumbnails, Video, Zoom]}
-      /> */}
+      />
 
       <KeyboardControls
         map={[
@@ -129,7 +129,7 @@ export default function App() {
           { name: "right", keys: ["ArrowRight", "d", "D"] },
           { name: "jump", keys: ["Space"] },
         ]}>
-        {/* <Canvas flat gl={{ alpha: true, stencil: false, antialias: true }}
+        <Canvas flat gl={{ alpha: true, stencil: false, antialias: true }}
           camera={{ position: [1, 2, 20], fov: 50 }}>
           <Suspense>
             <Preload all />
@@ -151,7 +151,7 @@ export default function App() {
               />
             ))}
           </Suspense>
-        </Canvas> */}
+        </Canvas>
       </KeyboardControls>
     </>
   )
