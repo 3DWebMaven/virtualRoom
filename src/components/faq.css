@@ -6,7 +6,7 @@
 }
 
 .faq-categories {
-  width: 300px;
+  width: 400px;
 }
 
 .faq-category {
@@ -54,7 +54,7 @@
 }
 
 .subject-content {
-  padding: 10px 0;
+  padding: 15px 0;
 }
 
 .item-title {
@@ -76,6 +76,5 @@
   .faq-categories {
     width: 0;
     visibility: hidden;
-    transition: visibility 0.3s ease-in-out, width 0.3s ease-in-out;
   }
 }

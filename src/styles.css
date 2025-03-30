@@ -42,3 +42,12 @@ body {
   -webkit-font-smoothing: antialiased;
   background: #f0f0f0;
 }
+
+.modal-dialog {
+  max-width: calc(100vw - 100px) !important;
+  max-height: calc(100vh - 100px) !important;
+}
+
+.accordion-button {
+  background-color: white !important;
+}
