@@ -5,7 +5,7 @@ import "./faq.css"
 
 const Faq = () => {
   const [selectedId, setSelectedId] = useState(Object.keys(data)?.[0])
-  const isScrolling = useRef(false);
+  const isScrolling = useRef(false)
   const contentRefs = useRef({})
   const categoryListRef = useRef(null)
 
@@ -63,7 +63,7 @@ const Faq = () => {
             onClick={() => {
               setSelectedId(item)
               isScrolling.current = true
-              setTimeout(() => isScrolling.current = false, 300)
+              setTimeout(() => (isScrolling.current = false), 1000)
             }}>
             <a href={`#${item}`}>{item}</a>
           </div>
