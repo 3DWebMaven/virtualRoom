@@ -52,6 +52,15 @@ body {
   background-color: white !important;
 }
 
+.accordion-button:focus {
+  box-shadow: none !important;
+  outline: 0 !important;
+}
+
+.accordion-button:not(.collapsed) {
+  box-shadow: none !important;
+}
+
 .c-kEkIHu {
   z-index: 2 !important;
 }
