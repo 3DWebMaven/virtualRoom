@@ -1,4 +1,5 @@
 import { useVideoTexture, useTexture, useGLTF, useAnimations, Html } from "@react-three/drei"
+import { useFrame } from "@react-three/fiber";
 import { RigidBody } from "@react-three/rapier"
 import { useRef, useEffect, useCallback } from 'react'
 import * as THREE from 'three'
@@ -8,13 +9,13 @@ export function Model(props) {
   const room = useGLTF("/showroom_o.glb")
   const videoTexture = useVideoTexture('../intro.webm')
   const npcModels = [
-    { rotation: [0, 0.1, 0], position: [-108, -5, 30], scale: 10, url: "/models/woman_5_o.glb" },
-    { rotation: [0, 1.5, 0], position: [-130, -5, 0], scale: 4.5, url: "/models/woman_4_o.glb" },
-    { rotation: [0, 3, 0], position: [-87, -5, -30], scale: 9, url: "/models/man_3_o.glb" },
-    { rotation: [0, -0.5, 0], position: [-30, -5, 25], scale: 0.1, url: "/models/man_4_o.glb" },
+    // { rotation: [0, 0.1, 0], position: [-108, -5, 30], scale: 10, url: "/models/woman_5_o.glb" },
+    // { rotation: [0, 1.5, 0], position: [-130, -5, 0], scale: 4.5, url: "/models/woman_4_o.glb" },
+    // { rotation: [0, 3, 0], position: [-87, -5, -30], scale: 9, url: "/models/man_3_o.glb" },
+    // { rotation: [0, -0.5, 0], position: [-30, -5, 25], scale: 0.1, url: "/models/man_4_o.glb" },
     { rotation: [0, 2.5, 0], position: [-110, -5, -25], scale: 3.8, url: "/models/man_2_o.glb" },
-    { rotation: [0, 0, 0], position: [-50, -5, -18], scale: 9.5, url: "/models/employee.glb" },
-    { rotation: [0, 2, 0], position: [-90, -5, 25], scale: 10, url: "/models/woman_6_o.glb"} 
+    // { rotation: [0, 0, 0], position: [-50, -5, -18], scale: 9.5, url: "/models/employee.glb" },
+    // { rotation: [0, 2, 0], position: [-90, -5, 25], scale: 10, url: "/models/woman_6_o.glb"} 
   ];
 
   return (
@@ -85,12 +86,12 @@ function AnimatedModel(props) {
   const { nodes, scene, animations } = useGLTF(props.url)
   const { actions } = useAnimations(animations, group)
   const near = 16
-
+  let action
   useEffect(() => {
     // Check if animations exist
     if (animations.length) {
       // Play the first animation (or a specific one if you know its name)
-      const action = actions[Object.keys(actions)[0]]
+      action = actions[Object.keys(actions)[0]]
       if (action) {
         action.reset()
         action.play()
@@ -105,6 +106,35 @@ function AnimatedModel(props) {
       // Object.values(actions).forEach(action => action.stop())
     }
   }, [actions, animations])
+
+  const INITIAL_ROTATION_THRESHOLD = Math.PI * 2.5;
+  const FINAL_ROTATION_THRESHOLD = Math.PI * 3;
+  const POSITION_THRESHOLD = -86;
+  const ROTATION_SPEED = 0.01;
+  const MOVEMENT_SPEED = 0.04;
+
+  useFrame(({ clock }) => {
+    const { rotation, position } = group.current;
+
+    // First phase: initial rotation
+    if (rotation.y < INITIAL_ROTATION_THRESHOLD) {
+      rotation.y += ROTATION_SPEED;
+      return;
+    }
+
+    // Second phase: horizontal movement
+    if (position.x < POSITION_THRESHOLD) {
+      position.x += MOVEMENT_SPEED;
+
+      return;
+    }
+
+    // Third phase: final rotation
+    if (rotation.y < FINAL_ROTATION_THRESHOLD) {
+      rotation.y += ROTATION_SPEED;
+    }else {action.paused = true }
+
+  })
 
   return (
     <primitive
