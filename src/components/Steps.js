@@ -2,7 +2,12 @@ import React from "react"
 
 const Highlight = ({ children }) => <span style={{ fontSize: "1.2em", color: "#fbff49", fontWeight: "bold" }}>{children}</span>
 
-const steps = [
+const optionTriggerWrapper = (trigger, callback) => {
+  callback && callback()
+  return trigger
+}
+
+const getSteps = optionCallback => [
   {
     id: "1-first",
     component: <div>Hello, I can provide information about the BESS project. Which category would you like to explore?</div>,
@@ -18,37 +23,45 @@ const steps = [
   {
     id: "1-0",
     options: [
-      { value: 1, label: "Environmental Impact", trigger: "1-1-first" },
-      { value: 2, label: "Visual & Landscape Impact", trigger: "1-2-first" },
-      { value: 3, label: "Noise and Safety Concerns", trigger: "1-3-first" },
-      { value: 4, label: "Traffic and Construction Impact", trigger: "1-4-first" },
-      { value: 5, label: "Community and Economic Benefits", trigger: "1-5-first" },
-      { value: 6, label: "Energy & Grid Impact", trigger: "1-6-first" },
-      { value: 7, label: "Land Use and Planning", trigger: "1-7-first" },
-      { value: 8, label: "End-of-Life & Decommissioning", trigger: "1-8-first" },
-      { value: 9, label: "Public Engagement & Next Steps", trigger: "1-9-first" }
+      { value: 1, label: "Environmental Impact", trigger: () => optionTriggerWrapper("1-1-first", optionCallback) },
+      { value: 2, label: "Visual & Landscape Impact", trigger: () => optionTriggerWrapper("1-2-first", optionCallback) },
+      { value: 3, label: "Noise and Safety Concerns", trigger: () => optionTriggerWrapper("1-3-first", optionCallback) },
+      { value: 4, label: "Traffic and Construction Impact", trigger: () => optionTriggerWrapper("1-4-first", optionCallback) },
+      { value: 5, label: "Community and Economic Benefits", trigger: () => optionTriggerWrapper("1-5-first", optionCallback) },
+      { value: 6, label: "Energy & Grid Impact", trigger: () => optionTriggerWrapper("1-6-first", optionCallback) },
+      { value: 7, label: "Land Use and Planning", trigger: () => optionTriggerWrapper("1-7-first", optionCallback) },
+      { value: 8, label: "End-of-Life & Decommissioning", trigger: () => optionTriggerWrapper("1-8-first", optionCallback) },
+      { value: 9, label: "Public Engagement & Next Steps", trigger: () => optionTriggerWrapper("1-9-first", optionCallback) }
     ]
   },
 
   // Environmental Impact
   {
     id: "1-1-first",
-    component: <div>Here are questions about <Highlight>Environmental Impact</Highlight>:</div>,
+    component: (
+      <div>
+        Here are questions about <Highlight>Environmental Impact</Highlight>:
+      </div>
+    ),
     asMessage: true,
     trigger: "1-1-0"
   },
   {
     id: "1-1",
-    component: <div>Would you like another question about <Highlight>Environmental Impact</Highlight>?</div>,
+    component: (
+      <div>
+        Would you like another question about <Highlight>Environmental Impact</Highlight>?
+      </div>
+    ),
     asMessage: true,
     trigger: "1-1-0"
   },
   {
     id: "1-1-0",
     options: [
-      { value: 1, label: "Will the project harm local wildlife or the environment?", trigger: "1-1-1" },
-      { value: 2, label: "Will the project affect air and water quality?", trigger: "1-1-2" },
-      { value: 3, label: "Go to Category", trigger: "1" }
+      { value: 1, label: "Will the project harm local wildlife or the environment?", trigger: () => optionTriggerWrapper("1-1-1", optionCallback) },
+      { value: 2, label: "Will the project affect air and water quality?", trigger: () => optionTriggerWrapper("1-1-2", optionCallback) },
+      { value: 3, label: "Go to Category", trigger: () => optionTriggerWrapper("1", optionCallback) }
     ]
   },
   {
@@ -86,22 +99,30 @@ const steps = [
   // Visual & Landscape Impact
   {
     id: "1-2-first",
-    component: <div>Here are questions about <Highlight>Visual & Landscape Impact:</Highlight></div>,
+    component: (
+      <div>
+        Here are questions about <Highlight>Visual & Landscape Impact:</Highlight>
+      </div>
+    ),
     asMessage: true,
     trigger: "1-2-0"
   },
   {
     id: "1-2",
-    component: <div>Would you like another question about <Highlight>Visual & Landscape Impact?</Highlight></div>,
+    component: (
+      <div>
+        Would you like another question about <Highlight>Visual & Landscape Impact?</Highlight>
+      </div>
+    ),
     asMessage: true,
     trigger: "1-2-0"
   },
   {
     id: "1-2-0",
     options: [
-      { value: 1, label: "How will the project affect the local landscape?", trigger: "1-2-1" },
-      { value: 2, label: "Will there be light pollution?", trigger: "1-2-2" },
-      { value: 3, label: "Go to Category", trigger: "1" }
+      { value: 1, label: "How will the project affect the local landscape?", trigger: () => optionTriggerWrapper("1-2-1", optionCallback) },
+      { value: 2, label: "Will there be light pollution?", trigger: () => optionTriggerWrapper("1-2-2", optionCallback) },
+      { value: 3, label: "Go to Category", trigger: () => optionTriggerWrapper("1", optionCallback) }
     ]
   },
   {
@@ -139,23 +160,31 @@ const steps = [
   // Noise and Safety Concerns
   {
     id: "1-3-first",
-    component: <div>Here are questions about <Highlight>Noise and Safety Concerns:</Highlight></div>,
+    component: (
+      <div>
+        Here are questions about <Highlight>Noise and Safety Concerns:</Highlight>
+      </div>
+    ),
     asMessage: true,
     trigger: "1-3-0"
   },
   {
     id: "1-3",
-    component: <div>Would you like another question about <Highlight>Noise and Safety Concerns?</Highlight></div>,
+    component: (
+      <div>
+        Would you like another question about <Highlight>Noise and Safety Concerns?</Highlight>
+      </div>
+    ),
     asMessage: true,
     trigger: "1-3-0"
   },
   {
     id: "1-3-0",
     options: [
-      { value: 1, label: "Will the BESS or substation generate noise?", trigger: "1-3-1" },
-      { value: 2, label: "Are there fire or explosion risks?", trigger: "1-3-2" },
-      { value: 3, label: "Is electromagnetic radiation (EMF) from the substation harmful?", trigger: "1-3-3" },
-      { value: 4, label: "Go to Category", trigger: "1" }
+      { value: 1, label: "Will the BESS or substation generate noise?", trigger: () => optionTriggerWrapper("1-3-1", optionCallback) },
+      { value: 2, label: "Are there fire or explosion risks?", trigger: () => optionTriggerWrapper("1-3-2", optionCallback) },
+      { value: 3, label: "Is electromagnetic radiation (EMF) from the substation harmful?", trigger: () => optionTriggerWrapper("1-3-3", optionCallback) },
+      { value: 4, label: "Go to Category", trigger: () => optionTriggerWrapper("1", optionCallback) }
     ]
   },
   {
@@ -211,22 +240,30 @@ const steps = [
   // Traffic and Construction Impact
   {
     id: "1-4-first",
-    component: <div>Here are questions about <Highlight>Traffic and Construction Impact:</Highlight></div>,
+    component: (
+      <div>
+        Here are questions about <Highlight>Traffic and Construction Impact:</Highlight>
+      </div>
+    ),
     asMessage: true,
     trigger: "1-4-0"
   },
   {
     id: "1-4",
-    component: <div>Would you like another question about <Highlight>Traffic and Construction Impact?</Highlight></div>,
+    component: (
+      <div>
+        Would you like another question about <Highlight>Traffic and Construction Impact?</Highlight>
+      </div>
+    ),
     asMessage: true,
     trigger: "1-4-0"
   },
   {
     id: "1-4-0",
     options: [
-      { value: 1, label: "Will there be heavy construction traffic?", trigger: "1-4-1" },
-      { value: 2, label: "How long will construction take?", trigger: "1-4-2" },
-      { value: 3, label: "Go to Category", trigger: "1" }
+      { value: 1, label: "Will there be heavy construction traffic?", trigger: () => optionTriggerWrapper("1-4-1", optionCallback) },
+      { value: 2, label: "How long will construction take?", trigger: () => optionTriggerWrapper("1-4-2", optionCallback) },
+      { value: 3, label: "Go to Category", trigger: () => optionTriggerWrapper("1", optionCallback) }
     ]
   },
   {
@@ -264,22 +301,30 @@ const steps = [
   // Community and Economic Benefits
   {
     id: "1-5-first",
-    component: <div>Here are questions about <Highlight>Community and Economic Benefits:</Highlight></div>,
+    component: (
+      <div>
+        Here are questions about <Highlight>Community and Economic Benefits:</Highlight>
+      </div>
+    ),
     asMessage: true,
     trigger: "1-5-0"
   },
   {
     id: "1-5",
-    component: <div>Would you like another question about <Highlight>Community and Economic Benefits?</Highlight></div>,
+    component: (
+      <div>
+        Would you like another question about <Highlight>Community and Economic Benefits?</Highlight>
+      </div>
+    ),
     asMessage: true,
     trigger: "1-5-0"
   },
   {
     id: "1-5-0",
     options: [
-      { value: 1, label: "Will this project benefit the local economy?", trigger: "1-5-1" },
-      { value: 2, label: "Are there community benefits?", trigger: "1-5-2" },
-      { value: 3, label: "Go to Category", trigger: "1" }
+      { value: 1, label: "Will this project benefit the local economy?", trigger: () => optionTriggerWrapper("1-5-1", optionCallback) },
+      { value: 2, label: "Are there community benefits?", trigger: () => optionTriggerWrapper("1-5-2", optionCallback) },
+      { value: 3, label: "Go to Category", trigger: () => optionTriggerWrapper("1", optionCallback) }
     ]
   },
   {
@@ -320,22 +365,30 @@ const steps = [
   // Energy & Grid Impact
   {
     id: "1-6-first",
-    component: <div>Here are questions about <Highlight>Energy & Grid Impact:</Highlight></div>,
+    component: (
+      <div>
+        Here are questions about <Highlight>Energy & Grid Impact:</Highlight>
+      </div>
+    ),
     asMessage: true,
     trigger: "1-6-0"
   },
   {
     id: "1-6",
-    component: <div>Would you like another question about <Highlight>Energy & Grid Impact?</Highlight></div>,
+    component: (
+      <div>
+        Would you like another question about <Highlight>Energy & Grid Impact?</Highlight>
+      </div>
+    ),
     asMessage: true,
     trigger: "1-6-0"
   },
   {
     id: "1-6-0",
     options: [
-      { value: 1, label: "How does the project benefit the UK's energy system?", trigger: "1-6-1" },
-      { value: 2, label: "Will this power the local area?", trigger: "1-6-2" },
-      { value: 3, label: "Go to Category", trigger: "1" }
+      { value: 1, label: "How does the project benefit the UK's energy system?", trigger: () => optionTriggerWrapper("1-6-1", optionCallback) },
+      { value: 2, label: "Will this power the local area?", trigger: () => optionTriggerWrapper("1-6-2", optionCallback) },
+      { value: 3, label: "Go to Category", trigger: () => optionTriggerWrapper("1", optionCallback) }
     ]
   },
   {
@@ -373,22 +426,30 @@ const steps = [
   // Land Use and Planning
   {
     id: "1-7-first",
-    component: <div>Here are questions about <Highlight>Land Use and Planning:</Highlight></div>,
+    component: (
+      <div>
+        Here are questions about <Highlight>Land Use and Planning:</Highlight>
+      </div>
+    ),
     asMessage: true,
     trigger: "1-7-0"
   },
   {
     id: "1-7",
-    component: <div>Would you like another question about <Highlight>Land Use and Planning?</Highlight></div>,
+    component: (
+      <div>
+        Would you like another question about <Highlight>Land Use and Planning?</Highlight>
+      </div>
+    ),
     asMessage: true,
     trigger: "1-7-0"
   },
   {
     id: "1-7-0",
     options: [
-      { value: 1, label: "Why was this site chosen?", trigger: "1-7-1" },
-      { value: 2, label: "Does this align with local and national planning policies?", trigger: "1-7-2" },
-      { value: 3, label: "Go to Category", trigger: "1" }
+      { value: 1, label: "Why was this site chosen?", trigger: () => optionTriggerWrapper("1-7-1", optionCallback) },
+      { value: 2, label: "Does this align with local and national planning policies?", trigger: () => optionTriggerWrapper("1-7-2", optionCallback) },
+      { value: 3, label: "Go to Category", trigger: () => optionTriggerWrapper("1", optionCallback) }
     ]
   },
   {
@@ -430,21 +491,29 @@ const steps = [
   // End-of-Life & Decommissioning
   {
     id: "1-8-first",
-    component: <div>Here are questions about <Highlight>End-of-Life & Decommissioning:</Highlight></div>,
+    component: (
+      <div>
+        Here are questions about <Highlight>End-of-Life & Decommissioning:</Highlight>
+      </div>
+    ),
     asMessage: true,
     trigger: "1-8-0"
   },
   {
     id: "1-8",
-    component: <div>Would you like another question about <Highlight>End-of-Life & Decommissioning?</Highlight></div>,
+    component: (
+      <div>
+        Would you like another question about <Highlight>End-of-Life & Decommissioning?</Highlight>
+      </div>
+    ),
     asMessage: true,
     trigger: "1-8-0"
   },
   {
     id: "1-8-0",
     options: [
-      { value: 1, label: "What happens when the project reaches the end of its life?", trigger: "1-8-1" },
-      { value: 2, label: "Go to Category", trigger: "1" }
+      { value: 1, label: "What happens when the project reaches the end of its life?", trigger: () => optionTriggerWrapper("1-8-1", optionCallback) },
+      { value: 2, label: "Go to Category", trigger: () => optionTriggerWrapper("1", optionCallback) }
     ]
   },
   {
@@ -468,22 +537,30 @@ const steps = [
   // Public Engagement & Next Steps
   {
     id: "1-9-first",
-    component: <div>Here are questions about <Highlight>Public Engagement & Next Steps:</Highlight></div>,
+    component: (
+      <div>
+        Here are questions about <Highlight>Public Engagement & Next Steps:</Highlight>
+      </div>
+    ),
     asMessage: true,
     trigger: "1-9-0"
   },
   {
     id: "1-9",
-    component: <div>Would you like another question about <Highlight>Public Engagement & Next Steps?</Highlight></div>,
+    component: (
+      <div>
+        Would you like another question about <Highlight>Public Engagement & Next Steps?</Highlight>
+      </div>
+    ),
     asMessage: true,
     trigger: "1-9-0"
   },
   {
     id: "1-9-0",
     options: [
-      { value: 1, label: "How can the community stay involved?", trigger: "1-9-1" },
-      { value: 2, label: "What are the next steps?", trigger: "1-9-2" },
-      { value: 3, label: "Go to Category", trigger: "1" }
+      { value: 1, label: "How can the community stay involved?", trigger: () => optionTriggerWrapper("1-9-1", optionCallback) },
+      { value: 2, label: "What are the next steps?", trigger: () => optionTriggerWrapper("1-9-2", optionCallback) },
+      { value: 3, label: "Go to Category", trigger: () => optionTriggerWrapper("1", optionCallback) }
     ]
   },
   {
@@ -518,4 +595,4 @@ const steps = [
   }
 ]
 
-export default steps
+export default getSteps
