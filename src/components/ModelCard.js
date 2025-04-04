@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect, useRef } from "react"
+import React, { Suspense, useEffect, useMemo, useRef } from "react"
 import { useAnimations, useGLTF } from "@react-three/drei"
 import { Canvas } from "@react-three/fiber"
 import * as THREE from "three"
@@ -20,14 +20,17 @@ const ModelPlayer = props => {
       const action = actions[Object.keys(actions)[0]]
       if (action) {
         actionRef.current = action
-        action.setLoop(THREE.LoopRepeat, Infinity).play()
+        action
+          .reset()
+          .setLoop(THREE.LoopRepeat, Infinity)
+          .play()
 
         action.paused = !props.isPlaying
       }
     }
 
     return () => {
-      // Object.values(actions).forEach(action => action.stop())
+      // Object.values(actions).forEach(action => action?.stop())
     }
   }, [actions, animations])
 

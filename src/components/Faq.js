@@ -5,11 +5,10 @@ import ModelCard from "./ModelCard"
 import getSteps from "./Steps"
 import config from "./Chatbot-Theme"
 import "./faq.css"
-import { useGLTF } from "@react-three/drei"
 
 const Faq = () => {
-  const employeeModel = { rotation: [0.1, -0.8, 0], position: [-0.5, -15, -15], scale: 12, url: "/models/employee.glb" }
-  const clientModel = { rotation: [0.1, 3, 0], position: [-0.5, -17, -15], scale: 7, url: "/models/woman_4_o.glb" }
+  const employeeModel = { rotation: [0.1, -0.8, 0], position: [-0.5, -15, -15], scale: 12, url: "/models/employee_1.glb" }
+  const clientModel = { rotation: [0.1, 3, 0], position: [-0.5, -17, -15], scale: 7, url: "/models/woman_4_o_1.glb" }
 
   const [isEmployeePlaying, setIsEmployeePlaying] = useState(false)
   const [isClientPlaying, setIsClientPlaying] = useState(false)
