@@ -15,7 +15,7 @@ export function Model(props) {
     // { rotation: [0, -0.5, 0], position: [-30, -5, 25], scale: 0.1, url: "/models/man_4_o.glb" },
     // { rotation: [0, 1.7, 0], position: [-50, -5, -2], scale: 10, url: "/models/man_5.glb"},
     { rotation: [0, 2.5, 0], position: [-110, -5, -25], scale: 3.8, url: "/models/man_2_o.glb" },//wheel chair man
-    // { rotation: [0, 0, 0], position: [-50, -5, -2], scale: 10, url: "/models/E.glb"} ,
+    { rotation: [0, 0.9, 0], position: [-65, -5, -50], scale: 10, url: "/models/E1_o.glb"} ,
     { rotation: [0, 0, 0], position: [-50, -5, -18], scale: 9.5, url: "/models/employee_o.glb" },
     { rotation: [0, 0, 0], position: [-35, -5, -5], scale: 10, url: "/models/F_o.glb"} ,
     { rotation: [0, -1.5, 0], position: [-85, -5, 10], scale: 10, url: "/models/woman_6_o.glb"},
