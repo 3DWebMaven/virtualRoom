@@ -13,12 +13,12 @@ export function Model(props) {
     // { rotation: [0, 1.5, 0], position: [-130, -5, 0], scale: 4.5, url: "/models/woman_4_o.glb" },
     // { rotation: [0, 3, 0], position: [-87, -5, -30], scale: 9, url: "/models/man_3_o.glb" },
     // { rotation: [0, -0.5, 0], position: [-30, -5, 25], scale: 0.1, url: "/models/man_4_o.glb" },
-    // { rotation: [0, 2.5, 0], position: [-110, -5, -25], scale: 3.8, url: "/models/man_2_o.glb" },
-    // { rotation: [0, 0, 0], position: [-50, -5, -18], scale: 9.5, url: "/models/employee.glb" },
-    // { rotation: [0, 2, 0], position: [-90, -5, 25], scale: 10, url: "/models/woman_6_o.glb"},
     // { rotation: [0, 1.7, 0], position: [-50, -5, -2], scale: 10, url: "/models/man_5.glb"},
-    { rotation: [0, 0, 0], position: [-50, -5, -2], scale: 10, url: "/models/E.glb"} ,
-    { rotation: [0, 0, 0], position: [-40, -5, -5], scale: 10, url: "/models/E_1.glb"} ,
+    { rotation: [0, 2.5, 0], position: [-110, -5, -25], scale: 3.8, url: "/models/man_2_o.glb" },//wheel chair man
+    { rotation: [0, 0, 0], position: [-50, -5, -18], scale: 9.5, url: "/models/employee.glb" },
+    // { rotation: [0, 0, 0], position: [-50, -5, -2], scale: 10, url: "/models/E.glb"} ,
+    { rotation: [0, 0, 0], position: [-35, -5, -5], scale: 10, url: "/models/F.glb"} ,
+    { rotation: [0, -1.5, 0], position: [-85, -5, 12], scale: 10, url: "/models/woman_6_o.glb"},
     { rotation: [0, 0, 0], position: [-50, -5, -2], scale: 10, url: "/models/man_6.glb"} 
   ];
 
@@ -95,7 +95,6 @@ function AnimatedModel(props) {
     // Check if animations exist
     if (animations.length) {
       // Play the first animation (or a specific one if you know its name)
-      console.log('actions: ', animations);
       action = actions[Object.keys(actions)[0]]
       if (action) {
         action.reset()
@@ -143,6 +142,7 @@ function AnimatedModel(props) {
 
   return (
     <primitive
+      side={2}
       ref={group}
       object={scene}
       position={props.position}
