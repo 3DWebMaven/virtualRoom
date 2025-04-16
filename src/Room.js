@@ -18,6 +18,7 @@ export function Model(props) {
     { rotation: [0, 2, 0], position: [-90, -5, 25], scale: 10, url: "/models/woman_6_o.glb"},
     // { rotation: [0, 1.7, 0], position: [-50, -5, -2], scale: 10, url: "/models/man_5.glb"},
     { rotation: [0, 0, 0], position: [-50, -5, -2], scale: 10, url: "/models/E.glb"} ,
+    { rotation: [0, 0, 0], position: [-40, -5, -5], scale: 10, url: "/models/E_1.glb"} ,
     { rotation: [0, 0, 0], position: [-50, -5, -2], scale: 10, url: "/models/man_6.glb"} 
   ];
 
